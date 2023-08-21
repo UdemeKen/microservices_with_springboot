@@ -1,5 +1,6 @@
 package com.CB.microservices.service;
 
+import com.CB.microservices.error.EmployeeNotFoundException;
 import com.CB.microservices.model.Employee;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +26,26 @@ public class EmployeeServiceImplementation implements EmployeeService{
     @Override
     public List<Employee> getAllEmployees() {
         return employees;
+    }
+
+    @Override
+    public Employee getEmployeeById(String id) {
+        return employees
+                .stream()
+                .filter(employee -> employee.getEmployeeId().equalsIgnoreCase(id))
+                .findFirst()
+                .orElseThrow(() -> new EmployeeNotFoundException("" +
+                        "Employee not found with Id: " + id));
+    }
+
+    @Override
+    public String deleteEmployeeById(String id) {
+        Employee employee = employees
+                .stream()
+                .filter(e -> e.getEmployeeId().equalsIgnoreCase(id))
+                .findFirst()
+                .get();
+        employees.remove(employee);
+        return "Employee deleted with this id: " + id;
     }
 }
