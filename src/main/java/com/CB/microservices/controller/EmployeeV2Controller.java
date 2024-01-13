@@ -9,17 +9,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/employees")
-public class EmployeeController {
+@RequestMapping("/v2/employees")
+public class EmployeeV2Controller {
 
-    @Qualifier("employeeServiceImplementation")
+    @Qualifier("employeeV2ServiceImpl")
     @Autowired
     private EmployeeService employeeService;
 
     @PostMapping
-    public Employee save(@RequestBody Employee employee){
+    public Employee save(@RequestBody Employee employee) {
         return employeeService.save(employee);
     }
+
     @GetMapping
     public List<Employee> getAllEmployees(){
         return employeeService.getAllEmployees();

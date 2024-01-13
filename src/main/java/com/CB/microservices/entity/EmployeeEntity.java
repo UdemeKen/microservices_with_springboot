@@ -1,8 +1,14 @@
-package com.CB.microservices.model;
+package com.CB.microservices.entity;
 
-//@JsonIgnoreProperties({"department"})
-public class Employee {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "tbl_employee")
+public class EmployeeEntity {
+
+    @Id
     private String employeeId;
     private String firstName;
     private String lastName;
